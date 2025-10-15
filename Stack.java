@@ -1,46 +1,33 @@
-package javaPractice;
-public class Stack {
-    int INITIAL_SIZE = 4;
-    int[] data;
-    int top;
-    public Stack() {
-        data = new int[INITIAL_SIZE];
-        top = -1;
+public interface Stack {
+	
+	/*
+	 * Purpose: insert an item onto the top of the stack
+	 * Parameters: int - the item to insert 
+	 * Returns: Nothing
+	 */
+	public void push(int v);
+	
+	/*
+	 * Purpose: removes and returns the top item from the stack
+	 * Parameters: None
+	 * Returns: int - the data value of the element removed
+	 *                  -1 if the stack is empty
+	 */
+	public int pop();
+	
+	/*
+	 * Purpose: Accesses the top item on the stack
+	 * Parameters: None
+	 * Returns: int - the data value of the top element
+	 *                  -1 if the stack is empty
+	 */
+	public int peek();
 
-    }
-
-    public void copyArray() {
-        int[] newArray = new int[data.length *2];
-        for (int i =0; i< data.length; i++) {
-            newArray[i] = data[i];
-        }
-        data = newArray;
-    }
-
-    public void push(int value) {
-        top++;
-        if (top == data.length) {
-            copyArray();
-            data[top] = value;
-        } else {
-            data[top] = value;
-        }
-    }
-
-    public int pop() {
-        if (isEmpty()) {
-            return -1;
-        } else {
-            return data[top--];
-        }
-    }
-
-    public int size() {
-        return top+1;
-    }
-
-    public boolean isEmpty() {
-        return size() == 0;
-    }
+	/*
+	 * Purpose: determines whether the stack is empty
+	 * Parameters: None
+	 * Returns: boolean - true if the stack is empty, false otherwise
+	 */
+	public boolean isEmpty();
 
 }
