@@ -14,15 +14,15 @@ public class RecursionTester {
 		//testSumOdd();
 		
 		/* recursive methods that operate on an array */
-		testSumArray();
-		// testCountNegative();
-		// testCountEqualTo();
-		// testAllAbove();
+		//testSumArray();
+		//testCountNegative();
+		//testCountEqualTo();
+		//testAllAbove();
 		
 		/* recursive methods that requires an accumulator */
-		// testThreeXInARow();
-		// testThreeInARow();
-		// testNInARow();
+		//testThreeXInARow();
+		//testThreeInARow();
+		testNInARow();
 		
 		System.out.println("\nPASSED " + testPassCount + "/" + testCount + " tests");
 	}
@@ -84,13 +84,11 @@ public class RecursionTester {
 		result = RecursionExercises.sumArray(arr2);
 		// should be 8+1+3+4=16
 		displayResults(result==16, "testSumArray2");
-		System.out.println(result);
 		
 		int[] arr3 = {4, 1, 3, 2, 5, 6, 2};
 		result = RecursionExercises.sumArray(arr3);
 		// should be 4+1+3+2+5+6+2=23
-		displayResults(result==23, "testSumArray3");
-		System.out.println(result);	
+		displayResults(result==23, "testSumArray3");	
 	}
 
 	public static void testCountNegative() {

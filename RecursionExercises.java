@@ -53,22 +53,18 @@ public class RecursionExercises {
 	 * Returns: int - the sum
 	 */
 	public static int sumArray(int[] arr) {
-		if (arr.length == 0) {
+		return sumArrayHelper(arr, 0);
+	}
+		
+	public static int sumArrayHelper(int[] arr, int index) {
+		if (index == arr.length) {
 			return 0;
-		} else if (arr.length == 1) {
-		 	return arr[0];
 		} else {
-			int[] newArray = new int[arr.length-1];
-			for (int i = 0; i< newArray.length; i++) {
-				newArray[i] = arr[i];
-			}
-			if (newArray.length == 0) {
-				return 0;
-			} else {
-				return arr[newArray.length] + sumArray(newArray);
-			}
+			return arr[index] + sumArrayHelper(arr, index+1);
 		}
 	}
+
+
 	
 	/*
 	 * Purpose: count the number of negative values found 
@@ -77,9 +73,20 @@ public class RecursionExercises {
 	 * Returns: int - count of negatives values found
 	 */	
 	public static int countNegative(int[] arr) {
-		// TODO: implement this method
-		return 0; // so it compiles
+		return countNegativeHelper(arr, 0);
 	}
+	public static int countNegativeHelper(int[] arr, int index) {
+		if (index == arr.length) {
+			return 0;
+		} else {
+			if (arr[index] < 0) {
+				return 1 + countNegativeHelper(arr, index+1);
+			} else {
+				return countNegativeHelper(arr, index+1);
+			}
+		}
+	}
+
 	
 	/*
 	 * Purpose: count the number of values in the array 
@@ -89,8 +96,18 @@ public class RecursionExercises {
 	 * Returns: int - count of elements equal to n
 	 */	
 	public static int countEqualTo(int[] arr, int n) {
-		// TODO: implement this method
-		return 0; // so it compiles
+		return countEqualToHelper(arr, n, 0);
+	}
+	public static int countEqualToHelper(int[] arr, int n, int index) {
+		if (index == arr.length) {
+			return 0;
+		} else {
+			if (arr[index] == n) {
+				return 1 + countEqualToHelper(arr, n, index+1);
+			} else {
+				return countEqualToHelper(arr, n, index+1);
+			}
+		}
 	}
 	
 	/*
@@ -100,9 +117,19 @@ public class RecursionExercises {
 	 * Returns: boolean - true if all values are greater than n
 	 */	
 	public static boolean allAbove(int[] arr, int n) {
-		// TODO: implement this method
-		return false; // so it compiles
+		return allAboveHelper(arr, n, 0);
 	}	
+	public static boolean allAboveHelper(int[] arr, int n, int index) {
+		if (index == arr.length) {
+			return true;
+		} else {
+			if (arr[index] > n) {
+				return allAboveHelper(arr, n, index+1);
+			} else {
+				return false;
+			}
+		}
+	}
 
 
 ///////////////////////////////////
@@ -118,9 +145,26 @@ public class RecursionExercises {
 	 * Returns: boolean - true if there are 3 x's in a row
 	 */	
 	public static boolean threeXInARow(int[] arr, int x) {
-		// TODO: implement this method
-		return false; // so it compiles
+		if (arr.length < 3) {
+			return false;
+		} else {
+			return threeInARowHelper(arr, x, 1);
+		}
 	}	
+	public static boolean threeInARowHelper(int[] arr, int x, int index) {
+		if (index+1 == arr.length) {
+			return false;
+		} else {
+			int prev = arr[index-1];
+			int cur = arr[index];
+			int next = arr[index+1];
+			if (prev == x && cur == x && next == x) {
+				return true;
+			} else {
+				return threeInARowHelper(arr, x, index+1);
+			}
+		}
+	}
 	
 
 	/*
@@ -129,10 +173,26 @@ public class RecursionExercises {
 	 * Returns: boolean - true if there are 3 of the same value in a row
 	 */	
 	public static boolean threeInARow(int[] arr) {
-		// TODO: implement this method
-		return false; // so it compiles
+		if (arr.length < 3) {
+			return false;
+		} else {
+			return threeInARowHelper(arr, 1);
+		}
 	}	
-	
+	public static boolean threeInARowHelper(int[] arr, int index) {
+		if (index+1 == arr.length) {
+			return false;
+		} else {
+			int prev = arr[index-1];
+			int cur = arr[index];
+			int next = arr[index+1];
+			if (prev == cur && cur == next) {
+				return true;
+			} else {
+				return threeInARowHelper(arr,index+1);
+			}
+		}
+	}
 	
 	/*
 	 * Purpose: determine if there are n elements with the same value in a row
@@ -141,8 +201,25 @@ public class RecursionExercises {
 	 * Returns: boolean - true if there are n of the same value in a row
 	 */	
 	public static boolean nInARow(int[] arr, int n) {
-		// TODO: implement this method
-		return false;
-	}	
-	
+		if (arr.length == 0 && n == 0) {
+			return true;
+		} else {
+			return nInARowHelper(arr, n, 0);
+		}
+	}
+
+	public static boolean nInARowHelper(int[] arr, int n, int index) {
+		if (index == arr.length || arr.length == 0) {
+			return false;
+		} else if (n == 1) {
+			return true;
+		} else {
+			int checkOccurance = countEqualTo(arr, arr[index]);
+			if (checkOccurance == n) {
+				return true;
+			} else {
+				return nInARowHelper(arr, n, index+1);
+			}
+		}
+	}
 }
